@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtLog", "ArtLog\ArtLog.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtLog.Droid", "Droid\ArtLog.Droid.csproj", "{38BC25CD-7F47-4291-8E68-7F5C3C9D01E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtLogTests", "ArtLogTests\ArtLogTests.csproj", "{72F8B3E8-8B75-40F7-A233-0B65FFCF41DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{38BC25CD-7F47-4291-8E68-7F5C3C9D01E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38BC25CD-7F47-4291-8E68-7F5C3C9D01E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38BC25CD-7F47-4291-8E68-7F5C3C9D01E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72F8B3E8-8B75-40F7-A233-0B65FFCF41DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72F8B3E8-8B75-40F7-A233-0B65FFCF41DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72F8B3E8-8B75-40F7-A233-0B65FFCF41DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72F8B3E8-8B75-40F7-A233-0B65FFCF41DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
