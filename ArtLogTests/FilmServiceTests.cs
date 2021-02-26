@@ -4,10 +4,10 @@ using Xunit;
 
 namespace ArtLogTests
 {
-    public class FilmServiceTests
+    public class FilmTests
     {
         [Fact]
-        public void GetFilm_Returns_()
+        public void Film_Has_Correct_Data_Structure()
         {
             // Arrange
             string testTitle = "Film 1";
@@ -32,7 +32,5 @@ namespace ArtLogTests
             Assert.Equal(testReleaseDate.Day, film.ReleaseDate.Day);
             Assert.Equal(testId, film.Id);
         }
-
-        [Fact]
     }
 }
