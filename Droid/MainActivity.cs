@@ -1,15 +1,16 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using ArtLog.Services;
+using System;
 
 namespace ArtLog.Droid
 {
     [Activity(Label = "ArtLog", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
@@ -20,7 +21,12 @@ namespace ArtLog.Droid
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.myButton);
 
-            button.Click += delegate { button.Text = $"{count++} clicks!"; };
+            FilmService filmService = new FilmService();
+            var film = await filmService.GetFilm();
+            var title = await film.Content.ReadAsStringAsync();
+
+            button.Click += delegate { button.Text = $"The film is: ${title}"; };
+            button.Click += delegate { Console.WriteLine(title); };
         }
     }
 }
