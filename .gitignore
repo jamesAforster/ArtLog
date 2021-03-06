@@ -10,7 +10,6 @@ autom4te.cache/
 *.tar.gz
 tarballs/
 test-results/
-secrets.json
 Secrets.cs
 
 # Mac bundle stuff

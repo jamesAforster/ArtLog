@@ -19,6 +19,9 @@ namespace ArtLog.Services
 
         public async Task<Film> GetFilm(string id)
         {
+            string searchQuery = CreateURIQuery(id);
+            var secrets = new Secrets();
+            var client = new HttpClient();
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
@@ -43,16 +46,18 @@ namespace ArtLog.Services
         public async Task<Payload> GetFilms(string query)
         {
             string searchQuery = CreateURIQuery(query);
+            var secrets = new Secrets();
 
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri($"https://movie-database-imdb-alternative.p.rapidapi.com/?s={searchQuery}&page=1&r=json"),
                 Headers =
-                {
-                    { "x-rapidapi-key", "{secrets.RapidApiKey}" },
-                    { "x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com" },
-                }
+
+            {
+                { "x-rapidapi-key", $"{secrets.RapidApiKey}" },
+                { "x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com" },
+            }
             };
 
             HttpResponseMessage response = await client.SendAsync(request);
