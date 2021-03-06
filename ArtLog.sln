@@ -10,9 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtLogTests", "ArtLogTests\ArtLogTests.csproj", "{72F8B3E8-8B75-40F7-A233-0B65FFCF41DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{18D4095F-F073-4DFE-927F-3988082E689E}"
-	ProjectSection(SolutionItems) = preProject
-		secrets.json = secrets.json
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -10,6 +10,7 @@ namespace ArtLog.Services
     public class FilmService
     {
         public HttpClient client = new HttpClient();
+        public Secrets secrets = new Secrets();
 
         public string CreateURIQuery(string query)
         {
@@ -24,7 +25,7 @@ namespace ArtLog.Services
                 RequestUri = new Uri($"https://movie-database-imdb-alternative.p.rapidapi.com/?i={id}&r=json"),
                 Headers =
                 {
-                    { "x-rapidapi-key", "b3d70bb793msh4e53df863c80e1ap13c999jsn53d5c3a65ae6" },
+                    { "x-rapidapi-key", $"{secrets.RapidApiKey}" },
                     { "x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com" },
                 },
             };
@@ -49,7 +50,7 @@ namespace ArtLog.Services
                 RequestUri = new Uri($"https://movie-database-imdb-alternative.p.rapidapi.com/?s={searchQuery}&page=1&r=json"),
                 Headers =
                 {
-                    { "x-rapidapi-key", "b3d70bb793msh4e53df863c80e1ap13c999jsn53d5c3a65ae6" },
+                    { "x-rapidapi-key", "{secrets.RapidApiKey}" },
                     { "x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com" },
                 }
             };
