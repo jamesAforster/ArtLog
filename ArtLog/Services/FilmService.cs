@@ -9,6 +9,8 @@ namespace ArtLog.Services
 {
     public class FilmService
     {
+        public HttpClient client = new HttpClient();
+
         public string CreateURIQuery(string query)
         {
             return query.Replace(" ", "%20");
@@ -16,56 +18,49 @@ namespace ArtLog.Services
 
         public async Task<Film> GetFilm(string id)
         {
-            string searchQuery = CreateURIQuery(id);
-
-            var client = new HttpClient();
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://movie-database-imdb-alternative.p.rapidapi.com/?i={searchQuery}&r=json"),
+                RequestUri = new Uri($"https://movie-database-imdb-alternative.p.rapidapi.com/?i={id}&r=json"),
                 Headers =
                 {
                     { "x-rapidapi-key", "b3d70bb793msh4e53df863c80e1ap13c999jsn53d5c3a65ae6" },
                     { "x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com" },
                 },
             };
+
             HttpResponseMessage response = await client.SendAsync(request);
 
             var responseContent = await response.Content.ReadAsStringAsync();
             Debug.WriteLine(responseContent);
 
-            Film json = JsonConvert.DeserializeObject<Film>(responseContent);
+            Film result = JsonConvert.DeserializeObject<Film>(responseContent);
 
-            Debug.WriteLine("Yeah");
-            return json;
-
+            return result;
         }
 
         public async Task<Payload> GetFilms(string query)
         {
             string searchQuery = CreateURIQuery(query);
 
-            var client = new HttpClient();
-
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri($"https://movie-database-imdb-alternative.p.rapidapi.com/?s={searchQuery}&page=1&r=json"),
                 Headers =
-
-            {
-                { "x-rapidapi-key", "b3d70bb793msh4e53df863c80e1ap13c999jsn53d5c3a65ae6" },
-                { "x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com" },
-            }
+                {
+                    { "x-rapidapi-key", "b3d70bb793msh4e53df863c80e1ap13c999jsn53d5c3a65ae6" },
+                    { "x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com" },
+                }
             };
 
             HttpResponseMessage response = await client.SendAsync(request);
 
             string responseContent = await response.Content.ReadAsStringAsync();
 
-            Payload json = JsonConvert.DeserializeObject<Payload>(responseContent);
+            Payload result = JsonConvert.DeserializeObject<Payload>(responseContent);
 
-            return json;
+            return result;
         }
     }
 }
