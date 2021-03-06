@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
+using ArtLog.Models;
+using Newtonsoft.Json;
 
 namespace ArtLog.Services
 {
     public class FilmService
     {
-        public async Task<HttpResponseMessage> GetFilm(string query)
+        public async Task<Root> GetFilms(string query)
         {
             string searchQuery = CreateURIQuery(query);
+
             var client = new HttpClient();
+
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
@@ -23,13 +28,17 @@ namespace ArtLog.Services
             }
             };
 
-            return await client.SendAsync(request);
+            var response = await client.SendAsync(request);
+            string stringy = await response.Content.ReadAsStringAsync();
+
+            var json = JsonConvert.DeserializeObject<Root>(stringy);
+
+            return json;
         }
 
         public string CreateURIQuery(string query)
         {
             return query.Replace(" ", "%20");
         }
-
     }
 }

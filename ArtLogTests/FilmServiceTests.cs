@@ -1,36 +1,27 @@
 using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using ArtLog.Models;
+using ArtLog.Services;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace ArtLogTests
 {
-    public class FilmTests
+    public class FilmServiceTests
     {
         [Fact]
-        public void Film_Has_Correct_Data_Structure()
+        public async void GetFilm_Returns_A_List_Of_Films()
         {
             // Arrange
-            string testTitle = "Film 1";
-            string testDirector = "James Forster";
-            DateTime testReleaseDate = new DateTime(1990, 2, 3);
-            int testId = 1;
+            var filmService = new FilmService();
+            string query = "The Neverending Story";
 
             // Act
-            Film film = new Film()
-            {
-                Title = testTitle,
-                Director = testDirector,
-                ReleaseDate = testReleaseDate,
-                Id = testId
-            };
+            Root actual = await filmService.GetFilms(query);
 
             // Assert
-            Assert.Equal(testTitle, film.Title);
-            Assert.Equal(testDirector, film.Director);
-            Assert.Equal(testReleaseDate.Year, film.ReleaseDate.Year);
-            Assert.Equal(testReleaseDate.Month, film.ReleaseDate.Month);
-            Assert.Equal(testReleaseDate.Day, film.ReleaseDate.Day);
-            Assert.Equal(testId, film.Id);
+            Assert.IsType<List<Film>>(actual.Search);
         }
     }
 }

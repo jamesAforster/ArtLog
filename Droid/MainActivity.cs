@@ -3,6 +3,7 @@ using Android.Widget;
 using Android.OS;
 using ArtLog.Services;
 using System;
+using ArtLog.Models;
 
 namespace ArtLog.Droid
 {
@@ -22,8 +23,9 @@ namespace ArtLog.Droid
             Button button = FindViewById<Button>(Resource.Id.myButton);
 
             FilmService filmService = new FilmService();
-            var film = await filmService.GetFilm();
-            var title = await film.Content.ReadAsStringAsync();
+            Root film = await filmService.GetFilms("James");
+
+            var title = film.Search[0].Title;
 
             button.Click += delegate { button.Text = $"The film is: ${title}"; };
             button.Click += delegate { Console.WriteLine(title); };
