@@ -31,7 +31,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Film.cs" />
     <Compile Include="Services\FilmService.cs" />
-    <Compile Include="Models\FilmData.cs" />
     <Compile Include="Secrets.cs" />
   </ItemGroup>
   <ItemGroup>
