@@ -11,7 +11,7 @@ namespace ArtLogTests
     public class FilmServiceTests
     {
         [Fact]
-        public async void GetFilm_Returns_A_List_Of_Films()
+        public async void GetFilms_Returns_A_List_Of_Films()
         {
             // Arrange
             var filmService = new FilmService();

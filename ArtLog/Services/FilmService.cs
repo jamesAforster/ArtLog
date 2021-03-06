@@ -29,6 +29,7 @@ namespace ArtLog.Services
             };
 
             var response = await client.SendAsync(request);
+
             string stringy = await response.Content.ReadAsStringAsync();
 
             var json = JsonConvert.DeserializeObject<Root>(stringy);
