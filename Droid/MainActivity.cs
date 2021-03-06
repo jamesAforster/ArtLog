@@ -23,7 +23,7 @@ namespace ArtLog.Droid
             Button button = FindViewById<Button>(Resource.Id.myButton);
 
             FilmService filmService = new FilmService();
-            Root film = await filmService.GetFilms("James");
+            Payload film = await filmService.GetFilms("James");
 
             var title = film.Search[0].Title;
 

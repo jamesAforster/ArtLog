@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -10,7 +9,39 @@ namespace ArtLog.Services
 {
     public class FilmService
     {
-        public async Task<Root> GetFilms(string query)
+        public string CreateURIQuery(string query)
+        {
+            return query.Replace(" ", "%20");
+        }
+
+        public async Task<Film> GetFilm(string id)
+        {
+            string searchQuery = CreateURIQuery(id);
+
+            var client = new HttpClient();
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"https://movie-database-imdb-alternative.p.rapidapi.com/?i={searchQuery}&r=json"),
+                Headers =
+                {
+                    { "x-rapidapi-key", "b3d70bb793msh4e53df863c80e1ap13c999jsn53d5c3a65ae6" },
+                    { "x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com" },
+                },
+            };
+            HttpResponseMessage response = await client.SendAsync(request);
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine(responseContent);
+
+            Film json = JsonConvert.DeserializeObject<Film>(responseContent);
+
+            Debug.WriteLine("Yeah");
+            return json;
+
+        }
+
+        public async Task<Payload> GetFilms(string query)
         {
             string searchQuery = CreateURIQuery(query);
 
@@ -28,18 +59,13 @@ namespace ArtLog.Services
             }
             };
 
-            var response = await client.SendAsync(request);
+            HttpResponseMessage response = await client.SendAsync(request);
 
-            string stringy = await response.Content.ReadAsStringAsync();
+            string responseContent = await response.Content.ReadAsStringAsync();
 
-            var json = JsonConvert.DeserializeObject<Root>(stringy);
+            Payload json = JsonConvert.DeserializeObject<Payload>(responseContent);
 
             return json;
-        }
-
-        public string CreateURIQuery(string query)
-        {
-            return query.Replace(" ", "%20");
         }
     }
 }

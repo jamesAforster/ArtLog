@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
 
 namespace ArtLog.Models
 {
@@ -13,11 +11,10 @@ namespace ArtLog.Models
         public string Poster { get; set; }
     }
 
-    public class Root
+    public class Payload
     {
         public List<Film> Search { get; set; }
         public string totalResults { get; set; }
         public string Response { get; set; }
     }
-
 }
