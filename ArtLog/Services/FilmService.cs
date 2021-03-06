@@ -25,7 +25,7 @@ namespace ArtLog.Services
                 RequestUri = new Uri($"https://movie-database-imdb-alternative.p.rapidapi.com/?i={searchQuery}&r=json"),
                 Headers =
                 {
-                    { "x-rapidapi-key", "b3d70bb793msh4e53df863c80e1ap13c999jsn53d5c3a65ae6" },
+                    { "x-rapidapi-key", "688f175b74mshb3a5a51070d4c7ap1ed0b5jsn8c9fe9826afb" },
                     { "x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com" },
                 },
             };
@@ -54,7 +54,7 @@ namespace ArtLog.Services
                 Headers =
 
             {
-                { "x-rapidapi-key", "b3d70bb793msh4e53df863c80e1ap13c999jsn53d5c3a65ae6" },
+                { "x-rapidapi-key", "688f175b74mshb3a5a51070d4c7ap1ed0b5jsn8c9fe9826afb" },
                 { "x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com" },
             }
             };
