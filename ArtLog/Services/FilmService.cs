@@ -17,7 +17,7 @@ namespace ArtLog.Services
         public async Task<Film> GetFilm(string id)
         {
             string searchQuery = CreateURIQuery(id);
-
+            var secrets = new Secrets();
             var client = new HttpClient();
             var request = new HttpRequestMessage
             {
@@ -25,7 +25,7 @@ namespace ArtLog.Services
                 RequestUri = new Uri($"https://movie-database-imdb-alternative.p.rapidapi.com/?i={searchQuery}&r=json"),
                 Headers =
                 {
-                    { "x-rapidapi-key", "688f175b74mshb3a5a51070d4c7ap1ed0b5jsn8c9fe9826afb" },
+                    { "x-rapidapi-key", $"{secrets.RapidApiKey}" },
                     { "x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com" },
                 },
             };
@@ -44,6 +44,7 @@ namespace ArtLog.Services
         public async Task<Payload> GetFilms(string query)
         {
             string searchQuery = CreateURIQuery(query);
+            var secrets = new Secrets();
 
             var client = new HttpClient();
 
@@ -54,7 +55,7 @@ namespace ArtLog.Services
                 Headers =
 
             {
-                { "x-rapidapi-key", "688f175b74mshb3a5a51070d4c7ap1ed0b5jsn8c9fe9826afb" },
+                { "x-rapidapi-key", $"{secrets.RapidApiKey}" },
                 { "x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com" },
             }
             };
