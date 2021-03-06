@@ -9,6 +9,9 @@ namespace ArtLog.Services
 {
     public class FilmService
     {
+        public HttpClient client = new HttpClient();
+        public Secrets secrets = new Secrets();
+
         public string CreateURIQuery(string query)
         {
             return query.Replace(" ", "%20");
@@ -22,31 +25,28 @@ namespace ArtLog.Services
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://movie-database-imdb-alternative.p.rapidapi.com/?i={searchQuery}&r=json"),
+                RequestUri = new Uri($"https://movie-database-imdb-alternative.p.rapidapi.com/?i={id}&r=json"),
                 Headers =
                 {
                     { "x-rapidapi-key", $"{secrets.RapidApiKey}" },
                     { "x-rapidapi-host", "movie-database-imdb-alternative.p.rapidapi.com" },
                 },
             };
+
             HttpResponseMessage response = await client.SendAsync(request);
 
             var responseContent = await response.Content.ReadAsStringAsync();
             Debug.WriteLine(responseContent);
 
-            Film json = JsonConvert.DeserializeObject<Film>(responseContent);
+            Film result = JsonConvert.DeserializeObject<Film>(responseContent);
 
-            Debug.WriteLine("Yeah");
-            return json;
-
+            return result;
         }
 
         public async Task<Payload> GetFilms(string query)
         {
             string searchQuery = CreateURIQuery(query);
             var secrets = new Secrets();
-
-            var client = new HttpClient();
 
             var request = new HttpRequestMessage
             {
@@ -64,9 +64,9 @@ namespace ArtLog.Services
 
             string responseContent = await response.Content.ReadAsStringAsync();
 
-            Payload json = JsonConvert.DeserializeObject<Payload>(responseContent);
+            Payload result = JsonConvert.DeserializeObject<Payload>(responseContent);
 
-            return json;
+            return result;
         }
     }
 }
